@@ -1,6 +1,6 @@
 package com.parkingSpot.app.authentication.configurations;
 
-import com.parkingSpot.app.Repositories.UserRepository;
+import com.parkingSpot.app.repositories.UserRepository;
 import com.parkingSpot.app.authentication.Customizations.CustomAuthenticationProvider;
 import com.parkingSpot.app.authentication.Customizations.CustomUserDetailsService;
 import com.parkingSpot.app.authentication.Customizations.CustomUsernamePasswordAuthenticationFilter;
@@ -54,7 +54,11 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
             response.sendError(HttpServletResponse.SC_FORBIDDEN, accessDeniedException.getMessage());
         })).and();
 
-        http.authorizeRequests().anyRequest().authenticated();
+        http.authorizeRequests()
+                .mvcMatchers("/api/admin/**").hasRole("ADMIN")
+                .mvcMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
+                .mvcMatchers("/user").hasRole("ADMIN")
+                .anyRequest().denyAll();
     }
 
     @Bean

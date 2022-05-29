@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Data
@@ -22,7 +20,7 @@ public class UserModel {
     private String username;
     private String password;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "role_id")
     private RoleModel role;
 

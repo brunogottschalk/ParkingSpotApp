@@ -1,7 +1,5 @@
 package com.parkingSpot.app.authentication.Customizations;
 
-import com.parkingSpot.app.Repositories.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

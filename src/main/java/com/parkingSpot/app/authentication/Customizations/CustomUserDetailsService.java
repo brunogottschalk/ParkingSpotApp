@@ -1,6 +1,6 @@
 package com.parkingSpot.app.authentication.Customizations;
 
-import com.parkingSpot.app.Repositories.UserRepository;
+import com.parkingSpot.app.repositories.UserRepository;
 import com.parkingSpot.app.models.UserModel;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
