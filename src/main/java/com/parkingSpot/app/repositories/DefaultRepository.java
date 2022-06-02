@@ -31,12 +31,20 @@ public class DefaultRepository {
     }
 
     @Transactional
-    public void newParking(Map parkingMap) {
-        entityManager.createNativeQuery("INSERT INTO history (entry_date, departure_date, user_id, spot_id, is_finished) VALUES (?,?,?,?, false)")
+    public void parkingShifter(Map parkingMap) {
+        entityManager.createNativeQuery("INSERT INTO history (entry_date, departure_date, user_id, spot_id, is_finished) VALUES (?,?,?,?,?)")
                 .setParameter(1, parkingMap.get("entryDate"))
                 .setParameter(2, parkingMap.get("departureDate"))
                 .setParameter(3, parkingMap.get("userId"))
                 .setParameter(4, parkingMap.get("spotId"))
+                .setParameter(5, parkingMap.get("finished"))
+                .executeUpdate();
+    }
+
+    @Transactional
+    public void finishPark(Long id) {
+        entityManager.createNativeQuery("UPDATE history SET is_finished = true WHERE id=?")
+                .setParameter(1, id)
                 .executeUpdate();
     }
 }

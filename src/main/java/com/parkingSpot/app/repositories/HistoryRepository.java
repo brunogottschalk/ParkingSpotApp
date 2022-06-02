@@ -15,5 +15,5 @@ public interface HistoryRepository extends CrudRepository<HistoryModel, Long> {
 
     List<HistoryModel> findHistoryByUserId(Long id);
 
-    Optional<Object> findByUserIdAndIsFinished(Long userId, boolean isFinished);
+    Optional<HistoryModel> findByUserIdAndIsFinished(Long userId, boolean isFinished);
 }
