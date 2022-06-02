@@ -14,7 +14,7 @@
 	<name>app</name>
 	<description>application based on the basic logic behind a parking spot logical system.</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
