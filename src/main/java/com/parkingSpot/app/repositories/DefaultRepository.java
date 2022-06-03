@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -31,8 +30,9 @@ public class DefaultRepository {
     }
 
     @Transactional
-    public void parkingShifter(Map parkingMap) {
-        entityManager.createNativeQuery("INSERT INTO history (entry_date, departure_date, user_id, spot_id, is_finished) VALUES (?,?,?,?,?)")
+    public void parkingShifter(Map<Object, Object> parkingMap) {
+        entityManager.createNativeQuery(
+                "INSERT INTO history (entry_date, departure_date, user_id, spot_id, is_finished) VALUES (?,?,?,?,?)")
                 .setParameter(1, parkingMap.get("entryDate"))
                 .setParameter(2, parkingMap.get("departureDate"))
                 .setParameter(3, parkingMap.get("userId"))

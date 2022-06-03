@@ -13,12 +13,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -29,7 +27,8 @@ public class ParkingService {
     private DefaultRepository defaultRepository;
     private HistoryRepository historyRepository;
 
-    public ParkingService(SpotsRepository spotsRepository, UserRepository userRepository, DefaultRepository defaultRepository, HistoryRepository historyRepository) {
+    public ParkingService(SpotsRepository spotsRepository, UserRepository userRepository,
+            DefaultRepository defaultRepository, HistoryRepository historyRepository) {
         this.spotsRepository = spotsRepository;
         this.userRepository = userRepository;
         this.defaultRepository = defaultRepository;
@@ -66,7 +65,6 @@ public class ParkingService {
             parkingMap.put("spotId", parkingRequestModel.getSpotId());
             parkingMap.put("finished", false);
 
-
             defaultRepository.parkingShifter(parkingMap);
             defaultRepository.spotsAvailabilityShifter(spot.get().getId(), false);
 
@@ -81,10 +79,8 @@ public class ParkingService {
     public boolean userAbleToNewParkingRequest() {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
 
-
         var currentUser = userRepository.findUserByUsername(authentication.getName()).get();
         var historyCurrentUser = historyRepository.findByUserIdAndIsFinished(currentUser.getId(), false);
-
 
         return historyCurrentUser.isEmpty();
     }
@@ -132,8 +128,6 @@ public class ParkingService {
 
         BigDecimal change = receivedBigDecimalValue.subtract(valueToPay);
 
-
-
         responseMessage.put("message", "successful payment");
         responseMessage.put("change", change.toPlainString());
 
@@ -144,7 +138,7 @@ public class ParkingService {
     }
 
     public BigDecimal valueCalculator(HistoryModel currentParking) {
-        var entryDate= currentParking.getEntryDate();
+        var entryDate = currentParking.getEntryDate();
         var departureDate = currentParking.getDepartureDate();
 
         var timeSpent = (float) ChronoUnit.HOURS.between(entryDate, departureDate);

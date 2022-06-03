@@ -1,6 +1,5 @@
 package com.parkingSpot.app.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,7 +13,7 @@ public class SpotsModel {
     @GeneratedValue
     private Long id;
 
-    @Column(name="is_available")
+    @Column(name = "is_available")
     private boolean isAvailable;
 
     @ManyToOne
