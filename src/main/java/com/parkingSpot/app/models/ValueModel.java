@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity(name = "spot_value")
-@Table(name = "spot_value")
+@Table(name = "spot_value", schema = "public")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

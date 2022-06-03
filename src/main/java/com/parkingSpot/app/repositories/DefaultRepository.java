@@ -15,7 +15,7 @@ public class DefaultRepository {
 
     @Transactional
     public void insertNewUser(UsernamePasswordAuthenticationRequest user) {
-        entityManager.createNativeQuery("INSERT INTO user (username, password, role_id) VALUES (?,?,2)")
+        entityManager.createNativeQuery("INSERT INTO public.user (username, password, role_id) VALUES (?,?,2)")
                 .setParameter(1, user.getUsername())
                 .setParameter(2, user.getPassword())
                 .executeUpdate();

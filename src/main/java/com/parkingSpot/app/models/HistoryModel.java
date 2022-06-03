@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "history")
+@Table(name = "history", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
 public class HistoryModel {

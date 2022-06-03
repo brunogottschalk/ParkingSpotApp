@@ -6,15 +6,15 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "user")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user")
+@Table(name = "user", schema = "public")
 public class UserModel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
@@ -23,6 +23,5 @@ public class UserModel {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private RoleModel role;
-
 
 }
