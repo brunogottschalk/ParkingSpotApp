@@ -5,6 +5,7 @@ import com.parkingSpot.app.authentication.Customizations.CustomAuthenticationPro
 import com.parkingSpot.app.authentication.Customizations.CustomUserDetailsService;
 import com.parkingSpot.app.authentication.Customizations.CustomUsernamePasswordAuthenticationFilter;
 import com.parkingSpot.app.authentication.Customizations.JwtTokenVerifier;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -17,11 +18,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 @Configuration
-public class AuthConfig extends WebSecurityConfigurerAdapter{
+public class AuthConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${jwt.key}")
     private String key;
@@ -34,14 +40,25 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
         return new CustomUserDetailsService(userRepository);
     }
 
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
+        corsConfiguration.setAllowedMethods(List.of("GET", "POST"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfiguration);
+        return source;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable().cors().and();
+        http.csrf().disable();
 
         http.authenticationProvider(new CustomAuthenticationProvider());
 
-        http.addFilterAt(new CustomUsernamePasswordAuthenticationFilter(authenticationManager(), key), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterAt(new CustomUsernamePasswordAuthenticationFilter(authenticationManager(), key),
+                UsernamePasswordAuthenticationFilter.class);
         http.addFilterAfter(new JwtTokenVerifier(key), CustomUsernamePasswordAuthenticationFilter.class);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and();
 
@@ -59,6 +76,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
                 .mvcMatchers("/api/admin/**").hasRole("ADMIN")
                 .mvcMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
                 .mvcMatchers(HttpMethod.POST, "/signing").permitAll()
+                .mvcMatchers("/login").permitAll()
                 .anyRequest().denyAll();
     }
 

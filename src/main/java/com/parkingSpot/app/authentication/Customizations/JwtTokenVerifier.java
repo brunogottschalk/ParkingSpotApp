@@ -27,8 +27,9 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authorizationHeader = request.getHeader("Authorization");
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+        String authorizationHeader = request.getHeader("authorization");
 
         if (request.getServletPath().equals("/signing") && request.getMethod().equals("POST")) {
             filterChain.doFilter(request, response);
@@ -52,7 +53,8 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
             var role = (List<Map<String, String>>) body.get("role");
             var username = body.getSubject();
 
-            var auth = role.stream().map(a -> new SimpleGrantedAuthority(a.get("authority"))).collect(Collectors.toSet());
+            var auth = role.stream().map(a -> new SimpleGrantedAuthority(a.get("authority")))
+                    .collect(Collectors.toSet());
 
             Authentication authenticate = new UsernamePasswordAuthenticationToken(username, null, auth);
             SecurityContextHolder.getContext().setAuthentication(authenticate);
