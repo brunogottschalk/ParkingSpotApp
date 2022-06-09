@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import CoreContext from "../contextApi/CoreContext";
+import { useNavigate } from "react-router-dom"; 
 
 function HomePageComponent() {
-  const { spots } = useContext(CoreContext); 
+  const { spots } = useContext(CoreContext);
+  const navigate = useNavigate();
   return (
     <div>
         { spots && spots.sort((a, b) => a.id > b.id ? 1 : -1).map((spot, index) => (
@@ -14,7 +16,7 @@ function HomePageComponent() {
               }>
                 { spot.spotType.type }
               </h3>
-            <button onClick={(event) => console.log(event.target)}>Rent this slot</button>
+            <button onClick={ () => navigate(`/parking/${spot.id}`) }>Rent this slot</button>
           </div>
         ))
         }

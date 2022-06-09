@@ -5,11 +5,14 @@ const LoginContext = createContext("")
 
 function LoginContextProvider({ children }) {
 
-  const [authorizationToken, setAuthorizationToken] = useState(undefined);
+  const [authorizationToken, setAuthorizationToken] = useState(JSON.parse(localStorage.getItem("authorizationToken")) || undefined);
 
   async function getAuthorizationToken(username, password) {
     const token = await parkingSpotApi.loginRequest(username, password);
     setAuthorizationToken(token);
+    if (token.status === 200) {
+      localStorage.setItem("authorizationToken", JSON.stringify(token));
+    }
   }
 
   const contextValues = {
