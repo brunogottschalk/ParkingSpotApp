@@ -1,19 +1,24 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import parkingSpotApi from '../services/ParkingSpotApi';
 
 const LoginContext = createContext("")
 
 function LoginContextProvider({ children }) {
-
-  const [authorizationToken, setAuthorizationToken] = useState(JSON.parse(localStorage.getItem("authorizationToken")) || undefined);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [authorizationToken, setAuthorizationToken] = useState(undefined);
 
   async function getAuthorizationToken(username, password) {
     const token = await parkingSpotApi.loginRequest(username, password);
     setAuthorizationToken(token);
-    if (token.status === 200) {
-      localStorage.setItem("authorizationToken", JSON.stringify(token));
-    }
   }
+
+  useEffect(() => {
+    if (!authorizationToken && location.pathname !== "/login") {
+      navigate("/login");
+    }
+  });
 
   const contextValues = {
     authorizationToken,
