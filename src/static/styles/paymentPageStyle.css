@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif,
+    Courier, monospace;
+}
+
+#paymentContainer {
+  width: 100%;
+  height: 100vh;
+  background-color: #0a2463;
+}
+
+#paymentForm {
+  width: 60vw;
+  height: 35vw;
+  background-color: #fffaff;
+  margin: 5vw auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  padding: 2vw;
+  font-size: 2vw;
+  color: #d8315b;
+}
+
+#paymentForm button {
+  width: 20vw;
+  height: 1.5vw;
+  background-color: #fffaff;
+  color: #d8315b;
+  border: 1px solid #d8315b;
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+#paymentForm button:hover {
+  transform: scale(102%);
+  background-color: #d8315b;
+  color: #fffaff;
+}
+
+#paymentForm label {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#paymentForm input {
+  height: 1.5vw;
+  color: #d8315b;
+  font-size: 1.5vw;
+  padding: 10px;
+  text-align: center;
+}

@@ -12,6 +12,28 @@ const parkingSpotApi = {
     const response = await result.json();
     return { status: result.status, content: response };
   },
+  signUpRequest: async (username, password) => {
+    const requestBody = JSON.stringify({ username, password });
+    const myHeaders = {};
+    myHeaders["Content-Type"] = "application/json";
+
+    const url = process.env.REACT_APP_SIGNUP_URI;
+    const result = await fetch(
+      url,
+      {
+        headers: myHeaders,
+        method: "POST",
+        body: requestBody
+      }
+    );
+
+    const response = await result.json();
+
+    return {
+      status: result.status,
+      content: response,
+    }
+  },
   parkingSpots: async (token) => {
     const myHeader = {
       authorization: token

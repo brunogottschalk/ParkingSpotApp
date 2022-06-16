@@ -43,6 +43,7 @@ function CoreContextProvider({ children }) {
 
   async function completePayment(value) {
     const response = await parkingSpotApi.completePayment(value, authorizationToken.content.token);
+    await getSpots();
     setCompletePaymentResponse(response);
   }
 

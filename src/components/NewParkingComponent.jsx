@@ -2,6 +2,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import CoreContext from '../contextApi/CoreContext';
 import moment from 'moment';
+import vipImage from '../static/resources/cartao-vip.png'
+import "../static/styles/newParkingPage.css"
 
 function NewParkingComponent() {
   const location = useLocation();
@@ -30,9 +32,11 @@ function NewParkingComponent() {
   }
 
   return (
-    <div>
-      <button onClick={ () => navigate("/home") }>Back to Home Page</button>
-      <form>
+    <div id="parkingPageContainer">
+      <div id="parkingSpotMenuBar">
+        <button onClick={ () => navigate("/home") }>Back to Home Page</button>
+      </div>
+      <form id="parkingPageForm">
         <label htmlFor="currentDate">
           <span>Entry-Date: </span>
           <input type="datetime-local" id="currentDate" value={ currentDate } disabled="true" />
@@ -40,10 +44,13 @@ function NewParkingComponent() {
         <label htmlFor="departureDate">
           <span>Departure-Date: </span>
           <input type="datetime-local"  id="departureDate" min={ currentDate } onChange={ valueCalculator }/>
-          <div id="spotType">{ currentSpot.spotType.type }</div>
-          <div id="valuePerHour">{ currentSpot.spotType.value } USD per Hour</div>
-          <div id="estimatedValue">Estimated Value: { estimatedValue } USD</div>
         </label>
+        
+          <div id="valuePerHour">
+            <span>{ currentSpot.spotType.value } USD per Hour</span>
+            { currentSpot.spotType.type === "vip" && <img id="spotTypeImage" src={ vipImage } alt="vip" />}
+          </div>
+          <div id="estimatedValue">Estimated Value: { estimatedValue } USD</div>
 
         <button id="newParkingRequestButton" onClick={ newParkingRequest }>Confirm new parking request</button>
 

@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import CoreContext from "../contextApi/CoreContext";
-import loadingLogo from "../static/resources/1488.gif"
+import loadingLogo from "../static/resources/1476.gif"
+import "../static/styles/historyPageStyle.css"
 
 function HistoryComponent() {
   const { histories } = useContext(CoreContext);
@@ -9,13 +10,16 @@ function HistoryComponent() {
 
   return (
     <div id="historiesContainer">
-      { !histories && <img src={ loadingLogo } alt="loading"/> }
-      { histories && histories.status !== 400 && <h4>{ histories.content.message }</h4>}
-      { histories && <button onClick={ () => navigate("/home") }>Back to Home Page</button>}
+      { !histories && <img id="loadingImage" src={ loadingLogo } alt="loading"/> }
+      {
+        histories && <div id="menuBar">
+          <button onClick={ () => navigate("/home") }>Back to Home Page</button>
+        </div>
+      }
       { 
         histories && histories.status === 200 &&
           histories.content.map((history) => (
-            <div id="historyCard" style={{ background: history.finished ? "#40F99B" : "#E85D75"}}>
+            <div id="historyCard" style={{ background: history.finished ? "#fffaff" : "#d8315b", color: history.finished ? "#d8315b" : "#fffaff" }}>
               <h2>history Id: { history.id }</h2>
               <h4>Entry date: { history.entryDate.replace("T", " ").split(".")[0] }</h4>
               <h4>Departure date: { history.departureDate.replace("T", " ").split(".")[0] }</h4>
@@ -25,10 +29,11 @@ function HistoryComponent() {
               { history.spot.available === true && histories.content.every((history) => history.finished) && 
                 <button onClick={ () => navigate(`/parking/${history.spot.id}`)}>rent this slot again</button>
               }
-              { history.finished ? <h4>Finished</h4> : <button>pay the Parking rent</button>}
+              { history.finished ? <h4 className="finishedTitle">FINISHED</h4> : <button onClick={ () => navigate(`/payment`)}>pay the Parking rent</button>}
             </div> 
         ))
       }
+      { histories && histories.status !== 200 && <h4 id="errorMessage">{ histories.content.message }</h4>}
     </div>
   );
 }

@@ -8,6 +8,7 @@ function LoginContextProvider({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [authorizationToken, setAuthorizationToken] = useState(undefined);
+  const [signUpResponse, setSignUpResponse] = useState(undefined);
 
   async function getAuthorizationToken(username, password) {
     const token = await parkingSpotApi.loginRequest(username, password);
@@ -15,14 +16,21 @@ function LoginContextProvider({ children }) {
   }
 
   useEffect(() => {
-    if (!authorizationToken && location.pathname !== "/login") {
+    if (!authorizationToken && location.pathname !== "/login" && location.pathname !== '/signup') {
       navigate("/login");
     }
   });
 
+  async function signUpRequest(username, password) {
+    const result = await parkingSpotApi.signUpRequest(username, password);
+    setSignUpResponse(result);
+  }
+
   const contextValues = {
     authorizationToken,
     getAuthorizationToken,
+    signUpRequest,
+    signUpResponse,
   };
 
   return (

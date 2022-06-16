@@ -32,7 +32,7 @@ function LoginComponent() {
         </label>
 
         <button type="button" onClick={ submitForm } >Log-in</button>
-        { authorizationToken && authorizationToken.status === 400 && <h4>{ authorizationToken.content.message }</h4> }
+        { authorizationToken && authorizationToken.status === 400 && <h4 className="errorMessage">{ authorizationToken.content.message }</h4> }
         { authorizationToken && authorizationToken.status === 200 && navigate("/home")}
       </form>
 
