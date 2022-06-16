@@ -1,0 +1,93 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif,
+    Courier, monospace;
+}
+
+#homePageContainer {
+  background-color: #0a2463;
+  width: 100%;
+  height: 100vh;
+}
+
+#menuBar {
+  border-bottom: 1px solid #d8315b;
+  background-color: #fffaff;
+  height: 3rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#menuBar button {
+  border: none;
+  background-color: #fffaff;
+  color: #d8315b;
+  border-right: 1px solid #d8315b;
+  border-left: 1px solid #d8315b;
+  height: 100%;
+  padding: 0 20px;
+  transition: all 200ms;
+  cursor: pointer;
+}
+
+#menuBar button:hover {
+  transform: scale(103%);
+  background-color: #d8315b;
+  color: #fffaff;
+}
+
+#spotsContainer {
+  border: 1px solid #0a2463;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.spotContainer {
+  width: 60vw;
+  height: 6rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin: 10px 0;
+  border: 2px solid #1e1b18;
+  border-radius: 5%;
+  color: #d8315b;
+}
+
+.spotContainer button {
+  width: 5vw;
+  height: 100%;
+  background-color: #d8315b;
+  color: #fffaff;
+  border: none;
+  transition: all 200ms ease-in;
+  cursor: pointer;
+}
+
+.spotContainer button:hover {
+  text-decoration: underline;
+}
+
+#vipImage {
+  width: 61px;
+  position: absolute;
+  right: 18.3vw;
+}
+
+#occupiedText {
+  width: 5vw;
+  height: 100%;
+  color: #d8315b;
+  background-color: #fffaff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

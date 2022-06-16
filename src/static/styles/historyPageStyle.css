@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif,
+    Courier, monospace;
+}
+
+#historiesContainer {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #0a2463;
+}
+
+#menuBar {
+  background-color: #fffaff;
+  width: 100%;
+}
+
+#historyCard {
+  width: 40vw;
+  height: 20vw;
+  margin: 2vw auto 0 auto;
+  padding: 10px;
+  border: 1px solid #d8315b;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#historyCard button {
+  border: 1px solid #d8315b;
+  width: 16vw;
+  height: 1.5vw;
+  background-color: #fffaff;
+  color: #d8315b;
+  transition: all 200ms;
+  cursor: pointer;
+}
+
+#historyCard button:hover {
+  transform: scale(102%);
+  background-color: #d8315b;
+  color: #fffaff;
+}
+
+.finishedTitle {
+  font-size: 1.2vw;
+  font-style: italic;
+}
+
+#errorMessage {
+  color: #fffaff;
+  text-align: center;
+  margin-top: 2vw;
+}
+
+#loadingImage {
+  position: absolute;
+  top: 50vh;
+  right: 50vw;
+}

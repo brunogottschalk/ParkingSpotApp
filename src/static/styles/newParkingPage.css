@@ -1,0 +1,100 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#parkingPageContainer {
+  width: 100%;
+  height: 100vh;
+  background-color: #0a2463;
+}
+
+#parkingSpotMenuBar {
+  width: 100%;
+  height: 3rem;
+  background-color: #fffaff;
+  border-bottom: 1px solid #d8315b;
+}
+
+#parkingSpotMenuBar button {
+  border-top: none;
+  border-bottom: none;
+  border-right: 1px solid #d8315b;
+  border-left: 1px solid #d8315b;
+  padding: 10px;
+  height: 100%;
+  background-color: #fffaff;
+  color: #d8315b;
+  transition: all 200ms;
+}
+
+#parkingSpotMenuBar button:hover {
+  background-color: #d8315b;
+  color: #fffaff;
+  transform: scale(102%);
+}
+
+#parkingPageForm {
+  width: 50vw;
+  height: 30vw;
+  background-color: #fffaff;
+  margin: auto;
+  margin-top: 4vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 2vw;
+  justify-content: space-evenly;
+  font-size: 2vw;
+  border: 1px solid #d8315b;
+  border-radius: 1%;
+  color: #d8315b;
+}
+
+#parkingPageForm label {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+#parkingPageForm input {
+  color: #d8315b;
+  height: 1.5vw;
+  width: 20vw;
+  text-align: center;
+  padding: 5px;
+  outline: none;
+  margin: 20px 0;
+}
+
+#valuePerHour {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#spotTypeImage {
+  width: 80px;
+  margin: 0 2vw;
+}
+
+#newParkingRequestButton {
+  border: 1px solid #d8315b;
+  color: #d8315b;
+  background-color: #fffaff;
+  justify-self: center;
+  align-self: center;
+  height: 2vw;
+  width: 15vw;
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+#newParkingRequestButton:hover {
+  background-color: #d8315b;
+  color: #fffaff;
+  transform: scale(102%);
+}
