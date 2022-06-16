@@ -31,12 +31,13 @@ public class UserController {
     }
 
     @PostMapping("/parking")
-    public ResponseEntity<Map<String, String>> newParking(@RequestBody ParkingRequestModel parkingRequestModel) throws ParseException {
+    public ResponseEntity<Map<String, String>> newParking(@RequestBody ParkingRequestModel parkingRequestModel)
+            throws ParseException {
         return parkingService.newParking(parkingRequestModel);
     }
 
     @GetMapping("/history")
-    public List<HistoryModel> getUserHistory(Authentication authentication) {
+    public ResponseEntity<Object> getUserHistory(Authentication authentication) {
         return userService.findHistory(authentication.getName());
     }
 
@@ -46,7 +47,8 @@ public class UserController {
     }
 
     @PostMapping("/parking/complete")
-    public ResponseEntity<Map<String, String>> completeParking(@RequestBody CompleteParkingRequest receivedParkingValue) {
+    public ResponseEntity<Map<String, String>> completeParking(
+            @RequestBody CompleteParkingRequest receivedParkingValue) {
         return parkingService.completeParking(receivedParkingValue);
     }
 }

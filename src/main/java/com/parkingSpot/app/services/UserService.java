@@ -5,6 +5,8 @@ import com.parkingSpot.app.repositories.HistoryRepository;
 import com.parkingSpot.app.repositories.SpotsRepository;
 import com.parkingSpot.app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -27,8 +29,16 @@ public class UserService {
         return spotsRepository.findAll();
     }
 
-    public List<HistoryModel> findHistory(String username) {
+    public ResponseEntity<Object> findHistory(String username) {
         Optional<UserModel> user = userRepository.findUserByUsername(username);
-        return historyRepository.findHistoryByUserId(user.get().getId());
+
+        List<HistoryModel> userHistory = historyRepository.findHistoryByUserId(user.get().getId());
+        if (userHistory.isEmpty()) {
+            Map<String, String> responseMessage = new HashMap<>();
+            responseMessage.put("message", "User hasn't made any parking requests yet.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseMessage);
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(userHistory);
     }
 }

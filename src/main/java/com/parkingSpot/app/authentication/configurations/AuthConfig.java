@@ -43,7 +43,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
+        corsConfiguration.setAllowedOrigins(List.of("https://parking-spot-app-frontend.herokuapp.com"));
         corsConfiguration.setAllowedMethods(List.of("GET", "POST"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration);
@@ -75,7 +75,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .mvcMatchers("/api/admin/**").hasRole("ADMIN")
                 .mvcMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
-                .mvcMatchers(HttpMethod.POST, "/signing").permitAll()
+                .mvcMatchers(HttpMethod.POST, "/signup").permitAll()
                 .mvcMatchers("/login").permitAll()
                 .anyRequest().denyAll();
     }

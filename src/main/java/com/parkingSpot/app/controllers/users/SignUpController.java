@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/signing")
-public class SigningController {
+@RequestMapping("/signup")
+public class SignUpController {
     private final SigningService signingService;
 
-    public SigningController(SigningService signingService) {
+    public SignUpController(SigningService signingService) {
         this.signingService = signingService;
     }
 
