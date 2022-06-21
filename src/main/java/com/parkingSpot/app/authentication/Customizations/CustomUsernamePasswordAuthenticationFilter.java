@@ -39,9 +39,6 @@ public class CustomUsernamePasswordAuthenticationFilter extends UsernamePassword
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
         try {
-            response.addHeader("Access-Control-Allow-Origin", "*");
-            response.addHeader("Access-Control-Allow-Methods", "*");
-
             var user = new ObjectMapper().readValue(request.getInputStream(),
                     UsernamePasswordAuthenticationRequest.class);
 
