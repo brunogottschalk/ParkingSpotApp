@@ -42,16 +42,6 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
         return new CustomUserDetailsService(userRepository);
     }
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("*"));
-        corsConfiguration.setAllowedMethods(List.of("GET", "POST"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfiguration);
-        return source;
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
