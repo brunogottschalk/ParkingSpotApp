@@ -12,7 +12,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -40,6 +39,9 @@ public class CustomUsernamePasswordAuthenticationFilter extends UsernamePassword
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
         try {
+            response.addHeader("Access-Control-Allow-Origin", "*");
+            response.addHeader("Access-Control-Allow-Methods", "*");
+
             var user = new ObjectMapper().readValue(request.getInputStream(),
                     UsernamePasswordAuthenticationRequest.class);
 

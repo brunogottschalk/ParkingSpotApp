@@ -43,16 +43,6 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public WebMvcConfigurer webMvcConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedMethods("GET", "POST").allowedHeaders("*");
-            }
-        };
-    }
-
-    @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedOrigins(List.of("*"));
