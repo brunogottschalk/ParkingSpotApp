@@ -20,7 +20,7 @@ function CoreContextProvider({ children }) {
   }
 
   useEffect(() => {
-    if (authorizationToken) {
+    if (authorizationToken && authorizationToken.status === 200) {
       getSpots();
     }
   }, [authorizationToken])

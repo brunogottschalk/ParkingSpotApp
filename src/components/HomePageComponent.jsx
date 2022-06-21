@@ -27,7 +27,7 @@ function HomePageComponent() {
       <div id="spotsContainer">
         { spots && spots.sort((a, b) => a.id > b.id ? 1 : -1).map((spot, index) => (
           <div className="spotContainer" key={ index } style={{ background: spot.available ? "#FFFAFF" : "#D8315B", color: spot.available ? "#D8315B" : "#FFFAFF" }}>
-            <h1 classname="spotId">{spot.id}º spot</h1>
+            <h1 className="spotId">{spot.id}º spot</h1>
             <h3>Value: { spot.spotType.value } USD/h</h3>
             { spot.available && <button onClick={ () => navigate(`/parking/${spot.id}`) }>Rent this slot</button> }
             { spot.spotType.type === "vip" && <img src={ vipImage } id="vipImage" alt="vip-spot"/> }
