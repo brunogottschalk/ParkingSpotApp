@@ -1,7 +1,11 @@
 package com.parkingSpot.app.authentication.configurations;
 
-import com.parkingSpot.app.authentication.Customizations.*;
 import com.parkingSpot.app.repositories.UserRepository;
+import com.parkingSpot.app.authentication.Customizations.CorsFilter;
+import com.parkingSpot.app.authentication.Customizations.CustomAuthenticationProvider;
+import com.parkingSpot.app.authentication.Customizations.CustomUserDetailsService;
+import com.parkingSpot.app.authentication.Customizations.CustomUsernamePasswordAuthenticationFilter;
+import com.parkingSpot.app.authentication.Customizations.JwtTokenVerifier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,11 +22,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -54,14 +55,15 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
-        http.cors().and();
 
         http.authenticationProvider(new CustomAuthenticationProvider());
 
         http.addFilterAt(new CustomUsernamePasswordAuthenticationFilter(authenticationManager(), key),
                 UsernamePasswordAuthenticationFilter.class);
+
         http.addFilterAfter(new JwtTokenVerifier(key), CustomUsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(new CorsFilter(), CustomUsernamePasswordAuthenticationFilter.class);
+
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and();
 
         http.exceptionHandling().authenticationEntryPoint(((request, response, authException) -> {
