@@ -14,5 +14,5 @@ The front-end framework used was React, with ContextApi for state management and
 
 
 <h2>You can try the application using this link</h2>
-<span>WARNING: the application may have a delay at first, this is because the Heroku is been loading and deploying the application container</span> 
 <a>https://parking-spot-app-frontend.herokuapp.com</a>
+<span>WARNING: the application may have a delay at first, this is because the Heroku is been loading and deploying the application container</span>
