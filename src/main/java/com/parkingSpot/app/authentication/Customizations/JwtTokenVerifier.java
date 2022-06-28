@@ -30,7 +30,6 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         String authorizationHeader = request.getHeader("authorization");
-
         if (request.getServletPath().equals("/signup") && request.getMethod().equals("POST")) {
             filterChain.doFilter(request, response);
             return;
